@@ -1,0 +1,161 @@
+{
+  "aggregate": {
+    "faithfulness": 0.3667,
+    "answer_relevancy": 0.2637,
+    "context_precision": 0.6417,
+    "context_recall": 0.55
+  },
+  "num_questions": 20,
+  "failures": [
+    {
+      "question": "Tờ khai được lập ngày nào và người ký đại diện là ai?",
+      "expected": "Tờ khai được lập ngày 24 tháng 01 năm 2025; người ký/đại diện là TRỊNH THỊ SANG.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về quy trình ký và xác nhận thông tin trong việc bảo vệ dữ liệu cá nhân.\n\nIn, sao, chup hoặc file dữ liệu.\n\nNguời đại díện ký, ghi rẵ họ tên và đóng dấu cùa tổ chức; doanh nghiệp đó.\n\ntháng\n\nMẫu số 03\n\nTÊN TÓ CHỨC\n\nCỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM\n\nĐộc lập -\n\nTự do - Hạnh\n\nSố:\n\nngày\n\nnăm\n\nCâu hỏi có thể trả lời: Mẫu số 03 là gì? | Ai là người đại diện ký vào mẫu số 03? | Mẫu số 03 cần có những thông tin gì?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về quy định liên quan đến người đại diện của tổ chức, doanh nghiệp trong việc cung cấp thông tin cá nhân.\n\n(Ký, ghi rõ họ tên)\n\nTheo quy định của Bộ luật Dân sự về nguời đại diện của t0 chức, doanh nghiệp.\n\n2 Ghi số điện thoai; fax; email của\n\nđại diện yêu cẩu cung cấp thông tin.\n\nIn, sao, chup hoặc file dữ liệu.\n\nCâu hỏi có thể trả lời: Ai là người đại diện của tổ chức, doanh nghiệp theo quy định của Bộ luật Dân sự? | Thông tin liên lạc nào cần cung cấp cho đại diện? | Có những hình thức nào để lưu trữ thông tin của đại diện?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về quy định liên quan đến việc yêu cầu cung cấp thông tin cá nhân theo Bộ luật Dân sự.\n\nHình thức khác (ghi rõ):\n\n11. Văn bản kèm theo (trong trường hợp có điều kiện):\n\nNGƯỜI YÊU cÀU\n\n(Ký, ghi rõ họ tên)\n\nTheo quy đpnh của Bộ luật Dân sự về nguời đại dỉện\n\ngíám hộ đối với người yêu cầu cung cấp\n\nthông tin là 2\n\ncbưa thành niên;\n\nCâu hỏi có thể trả lời: Hình thức nào được đề cập trong đoạn văn? | Ai là người đại diện giám hộ đối với người yêu cầu cung cấp thông tin? | Có điều kiện nào cho văn bản kèm theo không?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.0
+    },
+    {
+      "question": "Tờ khai có ghi số chứng chỉ hành nghề của nhân viên đại lý thuế không?",
+      "expected": "Không. Mục 'Chứng chỉ hành nghề số' trong phần Nhân viên đại lý thuế để trống.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về những quy định chung liên quan đến thông tin cá nhân.\n\nNHỮNG QUY ĐỊNH CHUNG\n\ne) Hỉnh ảnh của cá nhân;\n\ng) Số điện thoại; số\n\nminh nhân\n\nchiếu; số giấy phép Ỉái xe; số\n\nsố xe, số mã\n\nthuế cá nhân, số bào hiềm xã\n\nhội, số thé bào hiểm y tế;\n\nh) Tình trang hôn nhân;\n\nCâu hỏi có thể trả lời: Những thông tin cá nhân nào được quy định trong đoạn văn? | Có những loại số nào được đề cập trong các quy định chung? | Tình trạng hôn nhân có được đề cập trong đoạn văn không?",
+        "Đoạn văn này nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về các quy định liên quan đến năng lực hành vi dân sự của cá nhân.\n\ncbưa thành niên;\n\nhạn chễ năng Iực hành vi dân su,\n\nmất\n\nluc hành vi dân sự,\n\ncó khó khẳn trong nhận thức và làm chù hành viz\n\nGhi nơi cu trú cua người đại diệnnguời giám hệ.\n\n3 Ghi số điện\n\nfax,\n\ncùa\n\nđại diện/giám hộ.\n\nGhi rõ tên chủ\n\nchhoai =\n\nCâu hỏi có thể trả lời: Ai là người đại diện hoặc người giám hộ cho người chưa thành niên? | Có những hạn chế nào trong hành vi dân sự của người chưa thành niên? | Cần ghi những thông tin gì liên quan đến người đại diện hoặc người giám hộ?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về quy định liên quan đến người đại diện của tổ chức, doanh nghiệp trong việc cung cấp thông tin cá nhân.\n\n(Ký, ghi rõ họ tên)\n\nTheo quy định của Bộ luật Dân sự về nguời đại diện của t0 chức, doanh nghiệp.\n\n2 Ghi số điện thoai; fax; email của\n\nđại diện yêu cẩu cung cấp thông tin.\n\nIn, sao, chup hoặc file dữ liệu.\n\nCâu hỏi có thể trả lời: Ai là người đại diện của tổ chức, doanh nghiệp theo quy định của Bộ luật Dân sự? | Thông tin liên lạc nào cần cung cấp cho đại diện? | Có những hình thức nào để lưu trữ thông tin của đại diện?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.0833
+    },
+    {
+      "question": "Tờ khai thuế GTGT trong BCTC.pdf sử dụng mẫu số nào?",
+      "expected": "Mẫu số 01/GTGT.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn này nằm trong tài liệu BCTC.pdf và nói về tổng doanh thu và thuế giá trị gia tăng của hàng hóa, dịch vụ.\n\n(J0]\n\n[31|\n\n(32[\n\n3.703.685.610\n\n[331\n\n344.675,400\n\nd\n\nhoá; djch vp bản ra khóng tinh thué\n\n132a)\n\nTỏng doanh thu và thué già ưj gia tãng cua háng hóa, djch vu bin ra\n\n[J4]\n\n3.703.688.610\n\n[35]\n\n344.675,400\n\nJl\n\nCâu hỏi có thể trả lời: Doanh thu và thuế giá trị gia tăng của hàng hóa, dịch vụ là bao nhiêu? | Số liệu nào được đề cập trong đoạn văn? | Có thông tin gì về thuế trong đoạn văn không?",
+        "Tài liệu BCTC.pdf đề cập đến chủ đề thuế giá trị gia tăng trong báo cáo tài chính.\n\nThué glá tr] gia\n\nchoa khấu trir hết kỷ này\n\n{141/4/361-/221+1371-/38}-(J9a1) < 0}\n\n[411\n\n1/2\n\n(Run\n\ndộng=\n\nthong'\n\nhoạt =\n\nHop =\n\ndộng=\n\nđóng \"\n\ndéng=\n\ndóng $\n\n'phó:\n\ntang\n\nKhóng\n\nHàng W\n\nTrong\n\nháng_\n\nkhóng\n\nHáng'\n\nang\n\ndưpc\n\ntáng\n\nting=\n\nt ng\n\ntng\n\nCâu hỏi có thể trả lời: Đoạn văn này nói về điều gì? | Có những thuật ngữ nào được đề cập trong đoạn văn? | Đoạn văn có đề cập đến các khái niệm về thuế không?",
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thuế giá trị gia tăng trong hoạt động sản xuất kinh doanh.\n\nnh:o hàn giao đưpc khắu trử trong kỳ\n\nThué giá trj gia tăng phảl npp cúa hogt dộng sàn xuát kinh doanh trong k}\n\n[J0a)\n\n52.133.830\n\nabng sán xuat kinh doanh\n\nký tinh thué ((J0b|s]40a)\n\n(0b)\n\nThué gỈả tri gia\n\n[s01\n\n52.133.830\n\nThué glá tr] gia\n\nCâu hỏi có thể trả lời: Khi nào thì thuế giá trị gia tăng được khấu trừ? | Số tiền khấu trừ thuế giá trị gia tăng là bao nhiêu? | Đối tượng nào có thể áp dụng khấu trừ thuế giá trị gia tăng trong hoạt động sản xuất kinh doanh?"
+      ],
+      "worst_metric": "answer_relevancy",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.2083
+    },
+    {
+      "question": "Nghị định 13/2023/NĐ-CP có quy định một mức phạt tiền cụ thể cho hành vi vi phạm bảo vệ dữ liệu cá nhân không?",
+      "expected": "Không. Tài liệu chỉ nêu rằng tùy mức độ vi phạm mà tổ chức, cá nhân có thể bị xử lý kỷ luật, xử phạt vi phạm hành chính hoặc xử lý hình sự.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về các hình thức xử lý vi phạm quy định bảo vệ dữ liệu cá nhân.\n\nCơ quan; tổ chức, cá nhân vi phạm quy định bảo vệ dữ liệu cá nhân tùy\n\ntheo mức độ có thế bị xử lý kỷ luật, xử phạt vi phạm hành chính, xử lý hình sự\n\ntheo quy định\n\nĐỉều 5. Quản lý nhà nước về bảo vệ dữ liệu cá nhân\n\nCâu hỏi có thể trả lời: Cơ quan, tổ chức, cá nhân nào có thể bị xử lý khi vi phạm quy định bảo vệ dữ liệu cá nhân? | Mức độ xử lý vi phạm quy định bảo vệ dữ liệu cá nhân là gì? | Điều nào quy định về quản lý nhà nước về bảo vệ dữ liệu cá nhân?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về quy định chung về bảo vệ dữ liệu cá nhân và đối tượng áp dụng của nghị định.\n\nChương I\n\nNHỮNG QUY ĐỊNH CHUNG\n\nĐiều 1. Phạm vi điều chinh và đối tượng áp dụng\n\n1. Nghị định này quy định về bảo vệ dũ liệu cá nhân và trách nhiệm bảo\n\nvệ dữ liệu cá nhân của cơ quan, tổ chức; cá nhân có liên quan.\n\n2 Nghị định này áp dụng đối với:\n\nCâu hỏi có thể trả lời: Nghị định này quy định về vấn đề gì? | Đối tượng nào được áp dụng theo nghị định này? | Nghị định này có liên quan đến ai trong việc bảo vệ dữ liệu cá nhân?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về việc thanh tra, kiểm tra và xử lý vi phạm quy định về bảo vệ dữ liệu cá nhân.\n\nhoạt=\n\nNguồn\n\nnguồn\n\nngoài\n\nung\n\n'quốc\n\nnguồn\n\nthống~\n\n'quốc_\n\nthông\n\n'quốc\n\n25\n\n7. Thanh tra, kiểm\n\ngiải\n\nkhiếu nại;, tố cáo,xử lý hành vi vi phạm\n\nquy định về bào vệ dữ liệu cá nhân theo quy định của pháp Juật\n\nCâu hỏi có thể trả lời: Thanh tra, kiểm tra những gì liên quan đến dữ liệu cá nhân? | Có những hành vi vi phạm nào được xử lý theo quy định về bảo vệ dữ liệu cá nhân? | Ai là người có trách nhiệm giải quyết khiếu nại và tố cáo trong lĩnh vực bảo vệ dữ liệu cá nhân?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.2083
+    },
+    {
+      "question": "Kỳ tính thuế của tờ khai thuế GTGT là thời gian nào?",
+      "expected": "Quý 4 năm 2024.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thuế giá trị gia tăng phát sinh trong một kỳ kế toán.\n\nJl\n\nThué gỉá tr] gla ting phảt sinh trong kỷ (/36]-135/-1251)\n\n[361\n\n129.511.633\n\n\"\n\nDỉlu chinh\n\nkhấu trứ cua cắc ký trudc\n\nĐiều chinh giám\n\n[371\n\n1\n\nDièu chinh\n\n[38}\n\nv\n\nThué giả trj gia\n\nnh:o hàn giao đưpc khắu trử trong kỳ\n\nCâu hỏi có thể trả lời: Thế nào là thuế giá trị gia tăng (VAT) trong kỷ 136-135/-1251? | Điều chỉnh giá trị gia tăng có ảnh hưởng gì đến thuế trong kỳ? | Các yếu tố nào ảnh hưởng đến việc điều chỉnh thuế giá trị gia tăng?",
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về các chỉ tiêu liên quan đến thuế giá trị gia tăng trong báo cáo tài chính.\n\n[IIb] Qusnflluyen:\n\nDun Ij tiẻ:\n\nVijt Nan\n\nSTT\n\nChí tiêu\n\nGíá tr] hảng hòe, djch vụ\n\nThué giâ tr] gla\n\n(chưa eó (huế glà trj gia tang)\n\nphát sinh hoạt đng mua, bán trong kỳ (dánh dẳu \"X\")\n\n(2)\n\nP\n\nThué giá trj gia tâng coo\n\nkláu trir kỳ trưóc chuyen sang\n\nCâu hỏi có thể trả lời: Đoạn văn đề cập đến những chỉ tiêu nào liên quan đến thuế giá trị gia tăng? | Có những hoạt động nào được ghi nhận trong kỳ liên quan đến thuế giá trị gia tăng? | Thời điểm nào được xem là kỳ trước trong việc chuyển giao thuế giá trị gia tăng?",
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thuế giá trị gia tăng và các khoản khấu trừ liên quan.\n\ntng\n\n4.1\nThué giá trj gia tãng d2 ngh] hoàn (/42] < [1I1)\n4.2\nThul gỈả tri gia\ncón\nkhấu trir chuyén kỳ sau (/4J]-/41/-1421)\n\n[4J|\n\nNgày 24\n\n0/ nâmn 2025\n\nHp và tén:\n\nchí hánh\n\n's8:\n\nTRINII TIII SANG\n\nKý đi6n tP bời: CONG TYCO PHAN DHA SURFACES.\n\n2/2\n\nting\n\nCâu hỏi có thể trả lời: Thời gian nào được đề cập trong đoạn văn? | Ai là công ty được nhắc đến trong đoạn văn? | Đoạn văn nói về loại thuế nào?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.25
+    },
+    {
+      "question": "Theo Nghị định 13/2023/NĐ-CP, số định danh cá nhân có được xem là dữ liệu cá nhân cơ bản không?",
+      "expected": "Có. Điều 2 liệt kê số định danh cá nhân trong nhóm dữ liệu cá nhân cơ bản.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về định nghĩa dữ liệu cá nhân trong bối cảnh bảo vệ thông tin cá nhân.\n\nTrong Nghị định này, các tù ngữ dưới đây được hiểu như sau;\n\n1.Dũ liệu cá nhân là thông tin dưói dạng ký hiệu; chữ viết; chũ số, hình\n\nảnh; âm thanh hoặc ~\n\ntuơng tu trên môi truờng điện tử gắn liền với một con\n\nCâu hỏi có thể trả lời: Dữ liệu cá nhân được định nghĩa như thế nào trong Nghị định này? | Các hình thức nào được coi là dữ liệu cá nhân? | Dữ liệu cá nhân có thể tồn tại trên môi trường nào?",
+        "Đoạn văn này nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về định nghĩa và các loại dữ liệu cá nhân.\n\ntừ\n\n'động của cá nhân mà khi kết hợp với các dữ liệu; thông tin lưu trữ khác\n\ncó\n\nhoat\n\nxác định một con nguời cụ thế.\n\n3.Dữ liệu cá nhân co bản bao gồm:\n\na) Họ, chữ đệm và tên khai sinh, tên gọi khác\n\ncó);\n\nb) Ngày,~\n\nCâu hỏi có thể trả lời: Dữ liệu cá nhân bao gồm những thông tin gì? | Dữ liệu cá nhân có thể xác định điều gì về một người? | Có những loại thông tin nào được coi là dữ liệu cá nhân cơ bản?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về những quy định chung liên quan đến thông tin cá nhân.\n\nNHỮNG QUY ĐỊNH CHUNG\n\ne) Hỉnh ảnh của cá nhân;\n\ng) Số điện thoại; số\n\nminh nhân\n\nchiếu; số giấy phép Ỉái xe; số\n\nsố xe, số mã\n\nthuế cá nhân, số bào hiềm xã\n\nhội, số thé bào hiểm y tế;\n\nh) Tình trang hôn nhân;\n\nCâu hỏi có thể trả lời: Những thông tin cá nhân nào được quy định trong đoạn văn? | Có những loại số nào được đề cập trong các quy định chung? | Tình trạng hôn nhân có được đề cập trong đoạn văn không?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.25
+    },
+    {
+      "question": "Trong hai tài liệu, có thông tin về tên ngân hàng hoặc số tài khoản nộp thuế của CÔNG TY CỔ PHẦN DHA SURFACES không?",
+      "expected": "Không có thông tin về tên ngân hàng hoặc số tài khoản nộp thuế của CÔNG TY CỔ PHẦN DHA SURFACES trong hai tài liệu được cung cấp.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thông tin tài chính của Công ty Cổ phần DHA Surfaces.\n\nDộc lịp-Tự do-Ilgnh phúc\n\n{ola/ Ten\n\ndộng sán xuẩt kinh doanh: Hoọt .\n\nsán xuất kinh doanh\n\nthuòng\n\n(0/b] Ký tinh Lhuè: Quỷ 4 nâm 2024\n\n/04] Tên ngưởl nệp thué: CÔNG TY CO PHAN DHA SURFACES\n\n/05] Mf s6 thue: 0106769437\n\n[06] Tén dgi lỷ thue (aéu cò):\n\nCâu hỏi có thể trả lời: Công ty nào được đề cập trong đoạn văn? | Mã số thuế của công ty là gì? | Thời gian ký tinh là khi nào?",
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thuế giá trị gia tăng và các khoản khấu trừ liên quan.\n\ntng\n\n4.1\nThué giá trj gia tãng d2 ngh] hoàn (/42] < [1I1)\n4.2\nThul gỈả tri gia\ncón\nkhấu trir chuyén kỳ sau (/4J]-/41/-1421)\n\n[4J|\n\nNgày 24\n\n0/ nâmn 2025\n\nHp và tén:\n\nchí hánh\n\n's8:\n\nTRINII TIII SANG\n\nKý đi6n tP bời: CONG TYCO PHAN DHA SURFACES.\n\n2/2\n\nting\n\nCâu hỏi có thể trả lời: Thời gian nào được đề cập trong đoạn văn? | Ai là công ty được nhắc đến trong đoạn văn? | Đoạn văn nói về loại thuế nào?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về các quy định chung liên quan đến bảo vệ dữ liệu cá nhân trong lĩnh vực tài chính.\n\nNHỮNG QUY ĐỊNH CHUNG\n\nngoài, tổ chúc cung ứng dịch vụ trung gian thanh toán; các tỗ chức được phép\n\ntin\n\ntài khoản; thông tin về tiền gửi, thông tin\n\ntài sản\n\ndịch, thông tin về tố chức, cá nhân là bên bảo đảm tại\n\nchức tín dụng, chi\n\nCâu hỏi có thể trả lời: Những quy định chung nào áp dụng cho tổ chức cung ứng dịch vụ trung gian thanh toán? | Các tổ chức nào được phép tin tài khoản? | Thông tin nào cần được bảo mật liên quan đến tiền gửi và tài sản?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.3333
+    },
+    {
+      "question": "Có thể xác định từ hai tài liệu rằng CÔNG TY CỔ PHẦN DHA SURFACES đã lập hồ sơ đánh giá tác động xử lý dữ liệu cá nhân theo Điều 24 Nghị định 13/2023/NĐ-CP không?",
+      "expected": "Không thể xác định. Tờ khai thuế không cung cấp thông tin về việc CÔNG TY CỔ PHẦN DHA SURFACES đã lập hồ sơ đánh giá tác động xử lý dữ liệu cá nhân theo Điều 24.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về việc đánh giá tác động xử lý dữ liệu cá nhân.\n\nĐÁNH GIÁ TÁC ĐỘNG\n\nVÀ CHUYỂN DỮ LIỆU CÁ NIIÂN RA NƯỚC NGOAI\n\nĐiều 24. Đánh giá tác động xử lý dữ liệu cá nhân\n\n1.Bên Kiểm soát dữ liệu cá nhân, Bên Kiểm soát và xử lý dữ liệu cá nhân\n\nlập và luu\n\nHỗ sơ đánh giá tác động xử lý dữ liệu cá nhân của mình kể từ\n\nCâu hỏi có thể trả lời: Đánh giá tác động xử lý dữ liệu cá nhân được thực hiện bởi ai? | Hồ sơ đánh giá tác động xử lý dữ liệu cá nhân cần được lưu trữ trong bao lâu? | Có yêu cầu nào đối với bên kiểm soát dữ liệu cá nhân trong việc lập hồ sơ đánh giá không?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về hồ sơ đánh giá tác động xử lý dữ liệu cá nhân.\n\nHỗ sơ đánh giá tác động xử lý dữ liệu cá nhân của mình kể từ\n\nthời điềm\n\n'bitd\n\ndầu xử lý dữ liệu cá nhân.\n\nHồ sơ đánh giá tác động xử lý dũ liệu cá nhân của Bên Kiềm soát dữ liệu\n\ncá nhân, Bên Kiểm soát và xử lý dữ liệu cá nhân; bao gồm:\n\na)\n\nCâu hỏi có thể trả lời: Hồ sơ đánh giá tác động xử lý dữ liệu cá nhân bao gồm những thông tin gì? | Ai là bên kiểm soát và xử lý dữ liệu cá nhân trong hồ sơ đánh giá tác động? | Thời điểm nào được đề cập trong hồ sơ đánh giá tác động xử lý dữ liệu cá nhân?",
+        "Đoạn văn nằm trong tài liệu \"Nghi_dinh_so_13-2023_ve_bao_ve_du_lieu_ca_nhan_508ee.pdf\" và nói về việc đánh giá tác động và chuyển dữ liệu cá nhân ra nước ngoài.\n\nĐÁNH GIÁ TÁC ĐỘNG\n\nVÀ CHUYỂN DỮ LIỆU CÁ NIIÂN RA NƯỚC NGOAI\n\n2 Bên Xử lý dữ liệu cá nhân tiến hành lập và luu giữ Hồ sơ đánh giá tác\n\nsoát dữ liệu cá nhân. Hỗ sơ đánh giá tác động xử lý dữ liệu cá nhân của Bên\n\nXửlý dữ liệu cá nhân, bao gồm:\n\na)\n\nCâu hỏi có thể trả lời: Hồ sơ đánh giá tác động xử lý dữ liệu cá nhân bao gồm những gì? | Ai là bên thực hiện việc đánh giá tác động và chuyển dữ liệu cá nhân ra nước ngoài? | Tại sao cần lập và lưu giữ hồ sơ đánh giá tác động xử lý dữ liệu cá nhân?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.3333
+    },
+    {
+      "question": "Sau khi bù trừ thuế GTGT còn được khấu trừ kỳ trước chuyển sang, số thuế GTGT còn phải nộp trong kỳ là bao nhiêu?",
+      "expected": "52.133.830 đồng, theo chỉ tiêu [40]; số này bằng 129.511.633 - 77.377.803.",
+      "got": "Không tìm thấy.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thuế giá trị gia tăng trong hoạt động sản xuất kinh doanh.\n\nnh:o hàn giao đưpc khắu trử trong kỳ\n\nThué giá trj gia tăng phảl npp cúa hogt dộng sàn xuát kinh doanh trong k}\n\n[J0a)\n\n52.133.830\n\nabng sán xuat kinh doanh\n\nký tinh thué ((J0b|s]40a)\n\n(0b)\n\nThué gỈả tri gia\n\n[s01\n\n52.133.830\n\nThué glá tr] gia\n\nCâu hỏi có thể trả lời: Khi nào thì thuế giá trị gia tăng được khấu trừ? | Số tiền khấu trừ thuế giá trị gia tăng là bao nhiêu? | Đối tượng nào có thể áp dụng khấu trừ thuế giá trị gia tăng trong hoạt động sản xuất kinh doanh?",
+        "Đoạn văn này nằm trong tài liệu BCTC.pdf và nói về các số liệu liên quan đến thuế giá trị gia tăng và giá trị hàng hóa trong kỳ báo cáo tài chính.\n\nkláu trir kỳ trưóc chuyen sang\n\n[221\n\n77.377,803\n\nKê khal thuế glả tr] gía tdng phải npp ng n sách nhà nưde\n\nhoé, djch vọ mua vào trong kỷ\n\n11\n\nGiá tj và thué giá trj gia tãng cúa hàng hóa, djch vp mua vào\n\n[2J1\n\n2.405.743.241\n\n1241\n\n215.163,767\n\nCâu hỏi có thể trả lời: Đoạn văn đề cập đến những gì liên quan đến thuế giá trị gia tăng? | Có thông tin nào về giá trị hàng hóa trong đoạn văn không? | Kỳ trước có những thay đổi nào về thuế và giá cả không?",
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thuế giá trị gia tăng phát sinh trong một kỳ kế toán.\n\nJl\n\nThué gỉá tr] gla ting phảt sinh trong kỷ (/36]-135/-1251)\n\n[361\n\n129.511.633\n\n\"\n\nDỉlu chinh\n\nkhấu trứ cua cắc ký trudc\n\nĐiều chinh giám\n\n[371\n\n1\n\nDièu chinh\n\n[38}\n\nv\n\nThué giả trj gia\n\nnh:o hàn giao đưpc khắu trử trong kỳ\n\nCâu hỏi có thể trả lời: Thế nào là thuế giá trị gia tăng (VAT) trong kỷ 136-135/-1251? | Điều chỉnh giá trị gia tăng có ảnh hưởng gì đến thuế trong kỳ? | Các yếu tố nào ảnh hưởng đến việc điều chỉnh thuế giá trị gia tăng?"
+      ],
+      "worst_metric": "faithfulness",
+      "score": 0.0,
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature, or add direct source constraints.",
+      "avg_score": 0.375
+    },
+    {
+      "question": "Số thuế GTGT còn được khấu trừ kỳ trước chuyển sang là bao nhiêu?",
+      "expected": "77.377.803 đồng.",
+      "got": "Số thuế GTGT còn được khấu trừ kỳ trước chuyển sang là 77.377,803.",
+      "contexts": [
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về thuế giá trị gia tăng trong hoạt động sản xuất kinh doanh.\n\nnh:o hàn giao đưpc khắu trử trong kỳ\n\nThué giá trj gia tăng phảl npp cúa hogt dộng sàn xuát kinh doanh trong k}\n\n[J0a)\n\n52.133.830\n\nabng sán xuat kinh doanh\n\nký tinh thué ((J0b|s]40a)\n\n(0b)\n\nThué gỈả tri gia\n\n[s01\n\n52.133.830\n\nThué glá tr] gia\n\nCâu hỏi có thể trả lời: Khi nào thì thuế giá trị gia tăng được khấu trừ? | Số tiền khấu trừ thuế giá trị gia tăng là bao nhiêu? | Đối tượng nào có thể áp dụng khấu trừ thuế giá trị gia tăng trong hoạt động sản xuất kinh doanh?",
+        "Đoạn văn này nằm trong tài liệu BCTC.pdf và nói về các số liệu liên quan đến thuế giá trị gia tăng và giá trị hàng hóa trong kỳ báo cáo tài chính.\n\nkláu trir kỳ trưóc chuyen sang\n\n[221\n\n77.377,803\n\nKê khal thuế glả tr] gía tdng phải npp ng n sách nhà nưde\n\nhoé, djch vọ mua vào trong kỷ\n\n11\n\nGiá tj và thué giá trj gia tãng cúa hàng hóa, djch vp mua vào\n\n[2J1\n\n2.405.743.241\n\n1241\n\n215.163,767\n\nCâu hỏi có thể trả lời: Đoạn văn đề cập đến những gì liên quan đến thuế giá trị gia tăng? | Có thông tin nào về giá trị hàng hóa trong đoạn văn không? | Kỳ trước có những thay đổi nào về thuế và giá cả không?",
+        "Đoạn văn nằm trong tài liệu BCTC.pdf và nói về các chỉ tiêu liên quan đến thuế giá trị gia tăng trong báo cáo tài chính.\n\n[IIb] Qusnflluyen:\n\nDun Ij tiẻ:\n\nVijt Nan\n\nSTT\n\nChí tiêu\n\nGíá tr] hảng hòe, djch vụ\n\nThué giâ tr] gla\n\n(chưa eó (huế glà trj gia tang)\n\nphát sinh hoạt đng mua, bán trong kỳ (dánh dẳu \"X\")\n\n(2)\n\nP\n\nThué giá trj gia tâng coo\n\nkláu trir kỳ trưóc chuyen sang\n\nCâu hỏi có thể trả lời: Đoạn văn đề cập đến những chỉ tiêu nào liên quan đến thuế giá trị gia tăng? | Có những hoạt động nào được ghi nhận trong kỳ liên quan đến thuế giá trị gia tăng? | Thời điểm nào được xem là kỳ trước trong việc chuyển giao thuế giá trị gia tăng?"
+      ],
+      "worst_metric": "context_recall",
+      "score": 0.0,
+      "diagnosis": "Missing relevant chunks",
+      "suggested_fix": "Improve chunking/search, expand retrieval candidates, or adjust BM25/Dense retrieval.",
+      "avg_score": 0.4458
+    }
+  ]
+}
