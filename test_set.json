@@ -1,22 +1,3 @@
 [
-  {"question": "Quy trình xin nghỉ phép theo luật lao động Việt Nam gồm những bước nào?", "ground_truth": "Người lao động cần viết đơn xin nghỉ phép, gửi cho quản lý hoặc phòng nhân sự, chờ phê duyệt và cập nhật ngày nghỉ trên hệ thống công ty."},
-  {"question": "Tại sao cần sử dụng kỹ thuật chunking trong RAG?", "ground_truth": "Chunking giúp chia tài liệu lớn thành các phần nhỏ, cải thiện khả năng truy vấn và giảm thiểu sai sót khi mô hình sinh câu trả lời dựa trên dữ liệu ngữ cảnh."},
-  {"question": "BM25 khác gì so với truy vấn embedding?", "ground_truth": "BM25 dựa trên tần suất từ và độ dài tài liệu, còn truy vấn embedding dùng biểu diễn số học của văn bản để đo độ tương đồng ngữ nghĩa."},
-  {"question": "Làm sao để đánh giá tính chân thực của câu trả lời RAG?", "ground_truth": "Dùng chỉ số faithfulness để kiểm tra câu trả lời có bám sát thông tin thực tế trong ngữ cảnh hay không."},
-  {"question": "Context precision nghĩa là gì trong RAGAS?", "ground_truth": "Context precision đo tỷ lệ ngữ cảnh được sử dụng trong trả lời thực sự liên quan đến câu hỏi và giúp tạo ra câu trả lời chính xác."},
-  {"question": "Vì sao cần failure analysis sau khi đánh giá RAG?", "ground_truth": "Failure analysis giúp nhận diện nguyên nhân lỗi, xác định điểm yếu trong retrieval hoặc generation và đề xuất cải tiến cho hệ thống."},
-  {"question": "Có thể dùng markdown headers để chunk tài liệu không?", "ground_truth": "Có, chunk structure-aware dựa trên tiêu đề markdown để giữ nguyên cấu trúc chuyên mục và phân đoạn nội dung hợp lý."},
-  {"question": "Làm thế nào để cải thiện context recall?", "ground_truth": "Tăng khả năng truy vấn, mở rộng số lượng chunk lấy ra và đảm bảo chunk chứa thông tin liên quan đến câu hỏi."},
-  {"question": "Cross encoder reranker hoạt động theo nguyên lý nào?", "ground_truth": "Cross encoder đánh giá độ tương đồng giữa câu hỏi và từng tài liệu bằng cách ghép đôi và dự đoán điểm số phù hợp, sau đó xếp hạng lại kết quả."},
-  {"question": "Khi nào nên sử dụng fallback evaluation?", "ground_truth": "Khi môi trường không có API key mở OpenAI hoặc dịch vụ đánh giá live không sẵn sàng, ta dùng các phép đo overlap định trị để vẫn có thể kiểm tra pipeline."},
-  {"question": "Đâu là mục đích chính của RAGAS evaluation?", "ground_truth": "RAGAS evaluation mục đích kiểm tra chất lượng trả lời tổng thể qua các thước đo faithfulness, answer relevancy, context precision và context recall."},
-  {"question": "Answer relevancy khác với faithfulness như thế nào?", "ground_truth": "Answer relevancy đo xem câu trả lời có đúng nội dung câu hỏi hay không, còn faithfulness đo xem câu trả lời có dựa trên thông tin ngữ cảnh đúng sự thật hay không."},
-  {"question": "Tại sao cần mapping Diagnostic Tree trong failure analysis?", "ground_truth": "Diagnostic Tree giúp tổ chức nguyên nhân lỗi theo cấu trúc, từ đó đưa ra biện pháp khắc phục cụ thể cho từng nhóm lỗi."},
-  {"question": "MEEYC không phải một chỉ số nào, vậy ta dùng gì thay thế?", "ground_truth": "Trong RAGAS, các chỉ số chính là faithfulness, answer relevancy, context precision và context recall; không dùng MEEYC."},
-  {"question": "Làm thế nào để so sánh output từ M1 và M4?", "ground_truth": "M1 tạo chunk và M4 đánh giá chất lượng trả lời; so sánh thông qua hiệu quả retrieval, contextual relevance và các số liệu RAGAS để xác định liệu chunking có đủ tốt."},
-  {"question": "Một câu trả lời có context precision thấp báo hiệu điều gì?", "ground_truth": "Nó cho thấy mô hình sử dụng nhiều ngữ cảnh không liên quan, dẫn tới trả lời kém chính xác hoặc lạc đề."},
-  {"question": "Tại sao cần giới hạn top-N trong failure analysis?", "ground_truth": "Top-N tập trung vào các câu hỏi kém nhất để ưu tiên sửa lỗi nghiêm trọng thay vì phân tích toàn bộ dữ liệu quá rộng."},
-  {"question": "Cách nào để đánh giá hiệu suất reranker?", "ground_truth": "So sánh thứ hạng trước và sau khi rerank, kiểm tra xem tài liệu đúng đã được nâng lên trên cùng và giảm số lượng kết quả nhiễu."},
-  {"question": "Tại sao `test_set.json` nên chứa câu hỏi ngắn gọn?", "ground_truth": "Câu hỏi ngắn gọn giúp tập trung vào đánh giá hệ thống retrieval và generation mà không gây nhiễu hoặc quá tải ngữ cảnh."},
-  {"question": "Làm thế nào để lưu báo cáo RAGAS sau khi chạy eval?", "ground_truth": "Dùng hàm `save_report()` trong `src/m4_eval.py` để ghi `ragas_report.json` chứa aggregate metrics và danh sách failure."}
+  {"question": "hihi cả nhà tự tạo testset bằng cơm nhé", "ground_truth": "Không kịp tạo luôn"}
 ]
