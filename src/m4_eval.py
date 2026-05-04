@@ -1,6 +1,7 @@
 """Module 4: RAGAS Evaluation — 4 metrics + failure analysis."""
 
 import json
+import math
 import os
 import sys
 from dataclasses import dataclass
@@ -41,6 +42,17 @@ def _safe_overlap_score(source: str, target: str) -> float:
         return 0.0
     return len(source_tokens & target_tokens) / float(len(target_tokens))
 
+def _safe_metric(value, fallback: float) -> float:
+    """Convert RAGAS metric output to a finite float; use fallback for nan/inf/errors."""
+    try:
+        metric = float(value)
+    except (TypeError, ValueError):
+        return round(float(fallback), 4)
+
+    if math.isnan(metric) or math.isinf(metric):
+        return round(float(fallback), 4)
+
+    return round(metric, 4)
 
 def evaluate_ragas(questions: list[str], answers: list[str],
                    contexts: list[list[str]], ground_truths: list[str]) -> dict:
@@ -101,15 +113,22 @@ def evaluate_ragas(questions: list[str], answers: list[str],
 
         df = evaluation.to_pandas()
         for idx, row in df.iterrows():
+            fallback = _fallback_metrics(
+                questions[idx],
+                answers[idx],
+                contexts[idx],
+                ground_truths[idx],
+            )
+
             results.append(EvalResult(
                 question=questions[idx],
                 answer=answers[idx],
                 contexts=contexts[idx],
                 ground_truth=ground_truths[idx],
-                faithfulness=float(row.get("faithfulness", 0.0) or 0.0),
-                answer_relevancy=float(row.get("answer_relevancy", 0.0) or 0.0),
-                context_precision=float(row.get("context_precision", 0.0) or 0.0),
-                context_recall=float(row.get("context_recall", 0.0) or 0.0),
+                faithfulness=_safe_metric(row.get("faithfulness"), fallback.faithfulness),
+                answer_relevancy=_safe_metric(row.get("answer_relevancy"), fallback.answer_relevancy),
+                context_precision=_safe_metric(row.get("context_precision"), fallback.context_precision),
+                context_recall=_safe_metric(row.get("context_recall"), fallback.context_recall),
             ))
     except Exception:
         results = [

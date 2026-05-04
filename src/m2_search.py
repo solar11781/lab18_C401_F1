@@ -117,7 +117,11 @@ class DenseSearch:
         # 2. hits = self.client.search(collection, query_vector, limit=top_k)
         # 3. Return [SearchResult(text=hit.payload["text"], score=hit.score, metadata=hit.payload, method="dense")]
         query_vector = self._get_encoder().encode(query).tolist()
-        hits = self.client.search(collection, query_vector, limit=top_k)
+        hits = self.client.query_points(
+            collection_name=collection,
+            query=query_vector,
+            limit=top_k,
+        ).points
         results = []
         for hit in hits:
             payload = hit.payload.copy()
@@ -181,5 +185,5 @@ class HybridSearch:
 
 
 if __name__ == "__main__":
-    print(f"Original:  Nhân viên được nghỉ phép năm")
+    print("Original:  Nhân viên được nghỉ phép năm")
     print(f"Segmented: {segment_vietnamese('Nhân viên được nghỉ phép năm')}")

@@ -21,7 +21,7 @@ def main():
     print("(paragraph chunking + dense-only, no rerank, no enrichment)")
     print("=" * 60)
 
-    docs = load_documents()
+    docs = load_documents(use_ocr=True, allow_ocr_download=True)
     chunks = []
     for doc in docs:
         for c in chunk_basic(doc["text"], metadata=doc["metadata"]):

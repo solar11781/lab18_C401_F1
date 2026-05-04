@@ -22,7 +22,7 @@ def build_pipeline():
 
     # Step 1: Load & Chunk (M1)
     print("\n[1/4] Chunking documents...")
-    docs = load_documents()
+    docs = load_documents(use_ocr=True, allow_ocr_download=True)
     all_chunks = []
     for doc in docs:
         _, children = chunk_hierarchical(doc["text"], metadata=doc["metadata"])
