@@ -12,6 +12,7 @@ import io
 import os
 import re
 import sys
+from hashlib import md5
 from dataclasses import dataclass, field
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -24,29 +25,9 @@ except ImportError:
     fitz = None
 
 try:
-    import easyocr
-except ImportError:
-    easyocr = None
-
-try:
-    import cv2
-except ImportError:
-    cv2 = None
-
-try:
     import numpy as np
 except ImportError:
     np = None
-
-try:
-    from underthesea import sent_tokenize as vi_sent_tokenize
-except ImportError:
-    vi_sent_tokenize = None
-
-try:
-    from sentence_transformers import SentenceTransformer
-except ImportError:
-    SentenceTransformer = None
 
 try:
     from PIL import Image
@@ -57,8 +38,21 @@ except ImportError:
 SEMANTIC_MODEL_NAME = "paraphrase-multilingual-MiniLM-L12-v2"
 _semantic_model = None
 _semantic_model_attempted = False
+_vi_sent_tokenize = None
+_vi_sent_tokenize_attempted = False
+_cv2 = None
+_cv2_attempted = False
+_easyocr = None
+_easyocr_attempted = False
 _ocr_reader = None
 _ocr_reader_attempted = False
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PDF_CACHE_DIR = os.path.join(PROJECT_ROOT, ".cache", "m1_chunking")
+USE_PDF_OCR = os.getenv("M1_USE_OCR", "0").strip().lower() in {"1", "true", "yes"}
+ALLOW_OCR_DOWNLOAD = os.getenv("M1_DOWNLOAD_OCR_MODELS", "0").strip().lower() in {"1", "true", "yes"}
+USE_SEMANTIC_MODEL = os.getenv("M1_USE_EMBEDDINGS", "0").strip().lower() in {"1", "true", "yes"}
+USE_VI_SENT_TOKENIZER = os.getenv("M1_USE_UNDERSEA", "0").strip().lower() in {"1", "true", "yes"}
+MIN_USEFUL_PDF_TEXT = 200
 
 HEADER_RE = re.compile(r"^#{1,6}\s+\S")
 LEGAL_HEADER_RE = re.compile(
@@ -94,9 +88,62 @@ def _clean_pdf_text(text: str) -> str:
     return text.strip()
 
 
+def _get_cv2():
+    global _cv2, _cv2_attempted
+    if _cv2 is not None:
+        return _cv2
+    if _cv2_attempted:
+        return None
+    _cv2_attempted = True
+    try:
+        import cv2
+        _cv2 = cv2
+    except ImportError:
+        _cv2 = None
+    return _cv2
+
+
+def _get_easyocr():
+    global _easyocr, _easyocr_attempted
+    if _easyocr is not None:
+        return _easyocr
+    if _easyocr_attempted:
+        return None
+    _easyocr_attempted = True
+    try:
+        import easyocr
+        _easyocr = easyocr
+    except ImportError:
+        _easyocr = None
+    return _easyocr
+
+
+def _get_vi_sent_tokenize():
+    global _vi_sent_tokenize, _vi_sent_tokenize_attempted
+    if _vi_sent_tokenize is not None:
+        return _vi_sent_tokenize
+    if _vi_sent_tokenize_attempted:
+        return None
+    _vi_sent_tokenize_attempted = True
+    try:
+        from underthesea import sent_tokenize
+        _vi_sent_tokenize = sent_tokenize
+    except ImportError:
+        _vi_sent_tokenize = None
+    return _vi_sent_tokenize
+
+
+def _pdf_cache_path(fp: str, use_ocr: bool) -> str:
+    os.makedirs(PDF_CACHE_DIR, exist_ok=True)
+    stat = os.stat(fp)
+    raw_key = f"{os.path.abspath(fp)}|{stat.st_mtime_ns}|{stat.st_size}|ocr={int(use_ocr)}"
+    return os.path.join(PDF_CACHE_DIR, f"{md5(raw_key.encode('utf-8')).hexdigest()}.txt")
+
+
 def _preprocess_for_ocr(image_bytes: bytes):
     if np is None:
         return None
+    cv2 = _get_cv2()
     if cv2 is None:
         if Image is None:
             return None
@@ -135,35 +182,38 @@ def _preprocess_for_ocr(image_bytes: bytes):
     return img
 
 
-def _get_ocr_reader():
+def _get_ocr_reader(allow_download: bool = ALLOW_OCR_DOWNLOAD):
     global _ocr_reader, _ocr_reader_attempted
     if _ocr_reader is not None:
         return _ocr_reader
-    if _ocr_reader_attempted or easyocr is None:
+    if _ocr_reader_attempted:
         return None
 
     _ocr_reader_attempted = True
+    easyocr = _get_easyocr()
+    if easyocr is None:
+        return None
     try:
-        model_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".cache", "easyocr")
+        model_dir = os.path.join(PROJECT_ROOT, ".cache", "easyocr")
         os.makedirs(model_dir, exist_ok=True)
         _ocr_reader = easyocr.Reader(
             ["vi", "en"],
             gpu=False,
             verbose=False,
             model_storage_directory=model_dir,
-            download_enabled=True,
+            download_enabled=allow_download,
         )
     except Exception:
         _ocr_reader = None
     return _ocr_reader
 
 
-def _ocr_page(page) -> str:
-    reader = _get_ocr_reader()
+def _ocr_page(page, allow_download: bool = ALLOW_OCR_DOWNLOAD) -> str:
+    reader = _get_ocr_reader(allow_download=allow_download)
     if reader is None or fitz is None:
         return ""
     try:
-        pix = page.get_pixmap(matrix=fitz.Matrix(3, 3), alpha=False)
+        pix = page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False)
         image_bytes = pix.tobytes("png")
         ocr_input = _preprocess_for_ocr(image_bytes)
         if ocr_input is None and Image is not None:
@@ -202,9 +252,23 @@ def _page_text(page) -> str:
     return "\n".join(blocks).strip()
 
 
-def _load_pdf(fp: str) -> str:
+def _load_pdf(
+    fp: str,
+    use_ocr: bool = USE_PDF_OCR,
+    allow_ocr_download: bool = ALLOW_OCR_DOWNLOAD,
+    use_cache: bool = True,
+    write_cache: bool = True,
+) -> str:
     if fitz is None:
         return ""
+    cache_path = _pdf_cache_path(fp, use_ocr=use_ocr)
+    if use_cache and os.path.exists(cache_path):
+        try:
+            with open(cache_path, encoding="utf-8") as f:
+                return f.read().strip()
+        except Exception:
+            pass
+
     try:
         doc = fitz.open(fp)
         total_pages = len(doc)
@@ -212,8 +276,8 @@ def _load_pdf(fp: str) -> str:
         ocr_pages = 0
         for page in doc:
             page_text = _page_text(page)
-            if len(page_text) < 80:
-                ocr_text = _ocr_page(page)
+            if use_ocr and len(page_text) < MIN_USEFUL_PDF_TEXT:
+                ocr_text = _ocr_page(page, allow_download=allow_ocr_download)
                 if len(ocr_text) > len(page_text):
                     page_text = ocr_text
                     ocr_pages += 1
@@ -223,6 +287,12 @@ def _load_pdf(fp: str) -> str:
         text = _clean_pdf_text("\n\n".join(pages))
         if text and ocr_pages:
             print(f"OCR used for {os.path.basename(fp)}: {ocr_pages}/{total_pages} pages")
+        if text and write_cache:
+            try:
+                with open(cache_path, "w", encoding="utf-8") as f:
+                    f.write(text)
+            except Exception:
+                pass
         return text
     except Exception:
         return ""
@@ -232,13 +302,12 @@ def _get_semantic_model():
     global _semantic_model, _semantic_model_attempted
     if _semantic_model is not None:
         return _semantic_model
-    if _semantic_model_attempted or SentenceTransformer is None:
+    if _semantic_model_attempted or not USE_SEMANTIC_MODEL:
         return None
     _semantic_model_attempted = True
     try:
+        from sentence_transformers import SentenceTransformer
         _semantic_model = SentenceTransformer(SEMANTIC_MODEL_NAME, local_files_only=True)
-    except TypeError:
-        _semantic_model = None
     except Exception:
         _semantic_model = None
     return _semantic_model
@@ -326,6 +395,7 @@ def _split_sentences(text: str) -> list[str]:
     normalized = _normalize_text(text)
     if not normalized:
         return []
+    vi_sent_tokenize = _get_vi_sent_tokenize() if USE_VI_SENT_TOKENIZER else None
     if vi_sent_tokenize is not None:
         try:
             sentences = []
@@ -524,11 +594,19 @@ def _split_section_if_needed(header: str, body: str, max_chars: int) -> list[str
     return chunks or [full_text]
 
 
-def load_documents(data_dir: str = DATA_DIR) -> list[dict]:
+def load_documents(
+    data_dir: str = DATA_DIR,
+    use_ocr: bool | None = None,
+    allow_ocr_download: bool | None = None,
+    use_cache: bool = True,
+    write_cache: bool = True,
+) -> list[dict]:
     """Load markdown, text, and PDF files from data/."""
     docs = []
     if not os.path.isdir(data_dir):
         return docs
+    use_ocr = USE_PDF_OCR if use_ocr is None else use_ocr
+    allow_ocr_download = ALLOW_OCR_DOWNLOAD if allow_ocr_download is None else allow_ocr_download
 
     for pattern in ("*.md", "*.txt"):
         for fp in sorted(glob.glob(os.path.join(data_dir, pattern))):
@@ -544,12 +622,24 @@ def load_documents(data_dir: str = DATA_DIR) -> list[dict]:
                 continue
 
     for fp in sorted(glob.glob(os.path.join(data_dir, "*.pdf"))):
-        text = _load_pdf(fp)
+        text = _load_pdf(
+            fp,
+            use_ocr=use_ocr,
+            allow_ocr_download=allow_ocr_download,
+            use_cache=use_cache,
+            write_cache=write_cache,
+        )
         if text:
             docs.append({
                 "text": text,
-                "metadata": {"source": os.path.basename(fp), "type": "pdf"},
+                "metadata": {
+                    "source": os.path.basename(fp),
+                    "type": "pdf",
+                    "extraction": "ocr_or_text_layer" if use_ocr else "text_layer",
+                },
             })
+        else:
+            print(f"Warning: could not extract text from {os.path.basename(fp)}")
 
     return docs
 
@@ -838,7 +928,7 @@ def compare_strategies(documents: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
-    docs = load_documents()
+    docs = load_documents(use_ocr=True, allow_ocr_download=True, use_cache=False)
     print(f"Loaded {len(docs)} documents")
     results = compare_strategies(docs)
     for name, stats in results.items():
