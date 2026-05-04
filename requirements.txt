@@ -1,0 +1,24 @@
+# Full requirements for Lab18: Production RAG pipeline
+# Install with: pip install -r requirements.txt
+# Notes:
+# - On Windows, installing `torch` may require selecting the appropriate wheel
+#   for your CUDA/CPU environment. For CPU-only Windows, consider:
+#     pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+python-dotenv
+qdrant-client
+sentence-transformers
+transformers
+torch
+datasets
+ragas
+openai
+cohere
+rank-bm25
+underthesea
+numpy
+tqdm
+pytest
+sentencepiece
+pandas
+faiss-cpu

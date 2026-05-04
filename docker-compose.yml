@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      # Expose HTTP port (default 6333). GRPC can be enabled if needed.
+      - QDRANT__SERVICE__HTTP_PORT=6333
+
+volumes:
+  qdrant_storage:
+    driver: local
