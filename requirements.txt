@@ -22,3 +22,7 @@ pytest
 sentencepiece
 pandas
 faiss-cpu
+pymupdf
+easyocr
+Pillow
+opencv-python-headless
