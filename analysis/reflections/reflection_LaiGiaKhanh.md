@@ -1,6 +1,6 @@
 # Individual Reflection — Lab 18
 
-**Tên:** Lại Gia Khánh
+**Tên:** Lại Gia Khánh <br>
 **Module phụ trách:** M2
 
 ---
