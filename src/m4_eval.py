@@ -1,6 +1,8 @@
 """Module 4: RAGAS Evaluation — 4 metrics + failure analysis."""
 
-import os, sys, json
+import json
+import os
+import sys
 from dataclasses import dataclass
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -54,10 +56,10 @@ def evaluate_ragas(questions: list[str], answers: list[str],
 
     def _fallback_metrics(question: str, answer: str, ctxs: list[str], truth: str) -> EvalResult:
         joined_contexts = " ".join(ctxs or [])
-        faithfulness = _safe_overlap_score(answer, joined_contexts)
-        answer_relevancy = _safe_overlap_score(answer, truth)
-        context_precision = _safe_overlap_score(answer, joined_contexts)
-        context_recall = _safe_overlap_score(truth, joined_contexts)
+        faithfulness = _safe_overlap_score(joined_contexts, answer)
+        answer_relevancy = _safe_overlap_score(truth, answer)
+        context_precision = _safe_overlap_score(truth, joined_contexts)
+        context_recall = _safe_overlap_score(joined_contexts, truth)
         return EvalResult(
             question=question,
             answer=answer,
@@ -98,12 +100,12 @@ def evaluate_ragas(questions: list[str], answers: list[str],
         )
 
         df = evaluation.to_pandas()
-        for _, row in df.iterrows():
+        for idx, row in df.iterrows():
             results.append(EvalResult(
-                question=row.get("question", ""),
-                answer=row.get("response", ""),
-                contexts=row.get("contexts", []),
-                ground_truth=row.get("ground_truth", ""),
+                question=questions[idx],
+                answer=answers[idx],
+                contexts=contexts[idx],
+                ground_truth=ground_truths[idx],
                 faithfulness=float(row.get("faithfulness", 0.0) or 0.0),
                 answer_relevancy=float(row.get("answer_relevancy", 0.0) or 0.0),
                 context_precision=float(row.get("context_precision", 0.0) or 0.0),
@@ -181,6 +183,9 @@ def failure_analysis(eval_results: list[EvalResult], bottom_n: int = 10) -> list
         diagnosis, suggested_fix = _diagnosis(result)
         failures.append({
             "question": result.question,
+            "expected": result.ground_truth,
+            "got": result.answer,
+            "contexts": result.contexts,
             "worst_metric": worst_metric,
             "score": round(metrics[worst_metric], 4),
             "diagnosis": diagnosis,

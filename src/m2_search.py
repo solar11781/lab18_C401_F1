@@ -1,11 +1,21 @@
 """Module 2: Hybrid Search — BM25 (Vietnamese) + Dense + RRF."""
 
-import os, sys
+import os
+import re
+import sys
+import warnings
 from dataclasses import dataclass
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import (QDRANT_HOST, QDRANT_PORT, COLLECTION_NAME, EMBEDDING_MODEL,
                     EMBEDDING_DIM, BM25_TOP_K, DENSE_TOP_K, HYBRID_TOP_K)
+
+for pattern in (
+    "builtin type SwigPyPacked has no __module__ attribute",
+    "builtin type SwigPyObject has no __module__ attribute",
+    "builtin type swigvarlink has no __module__ attribute",
+):
+    warnings.filterwarnings("ignore", message=pattern, category=DeprecationWarning)
 
 
 @dataclass
@@ -17,13 +27,13 @@ class SearchResult:
 
 
 def segment_vietnamese(text: str) -> str:
-    """Segment Vietnamese text into words."""
-    # TODO: Implement Vietnamese word segmentation
-    # 1. from underthesea import word_tokenize
-    # 2. return word_tokenize(text, format="text")
-    # Why: BM25 needs word boundaries. "nghỉ phép" = 1 word, not 2.
-    from underthesea import word_tokenize
-    return word_tokenize(text, format="text")
+    """Segment Vietnamese text into words, with a safe regex fallback."""
+    try:
+        from underthesea import word_tokenize
+
+        return word_tokenize(text, format="text")
+    except ImportError:
+        return " ".join(re.findall(r"\w+", text.lower(), flags=re.UNICODE))
 
 
 class BM25Search:
@@ -34,7 +44,7 @@ class BM25Search:
 
     def index(self, chunks: list[dict]) -> None:
         """Build BM25 index from chunks."""
-        # TODO: Implement BM25 indexing
+        # Implement BM25 indexing
         # 1. self.documents = chunks
         # 2. For each chunk: segment_vietnamese(chunk["text"]) → split by space
         # 3. self.corpus_tokens = [tokenized list for each chunk]
@@ -50,7 +60,7 @@ class BM25Search:
 
     def search(self, query: str, top_k: int = BM25_TOP_K) -> list[SearchResult]:
         """Search using BM25."""
-        # TODO: Implement BM25 search
+        # Implement BM25 search
         # 1. tokenized_query = segment_vietnamese(query).split()
         # 2. scores = self.bm25.get_scores(tokenized_query)
         # 3. top_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:top_k]
@@ -83,7 +93,7 @@ class DenseSearch:
 
     def index(self, chunks: list[dict], collection: str = COLLECTION_NAME) -> None:
         """Index chunks into Qdrant."""
-        # TODO: Implement dense indexing
+        # Implement dense indexing
         # 1. from qdrant_client.models import Distance, VectorParams, PointStruct
         # 2. self.client.recreate_collection(collection, VectorParams(size=EMBEDDING_DIM, distance=Distance.COSINE))
         # 3. texts = [c["text"] for c in chunks]
@@ -102,7 +112,7 @@ class DenseSearch:
 
     def search(self, query: str, top_k: int = DENSE_TOP_K, collection: str = COLLECTION_NAME) -> list[SearchResult]:
         """Search using dense vectors."""
-        # TODO: Implement dense search
+        # Implement dense search
         # 1. query_vector = self._get_encoder().encode(query).tolist()
         # 2. hits = self.client.search(collection, query_vector, limit=top_k)
         # 3. Return [SearchResult(text=hit.payload["text"], score=hit.score, metadata=hit.payload, method="dense")]
@@ -124,7 +134,7 @@ class DenseSearch:
 def reciprocal_rank_fusion(results_list: list[list[SearchResult]], k: int = 60,
                            top_k: int = HYBRID_TOP_K) -> list[SearchResult]:
     """Merge ranked lists using RRF: score(d) = Σ 1/(k + rank)."""
-    # TODO: Implement RRF
+    # Implement RRF
     # 1. rrf_scores = {}  # text → {"score": float, "result": SearchResult}
     # 2. For each result_list in results_list:
     #      For rank, result in enumerate(result_list):
@@ -143,7 +153,7 @@ def reciprocal_rank_fusion(results_list: list[list[SearchResult]], k: int = 60,
     
     # Return top_k SearchResult with method="hybrid"
     results = []
-    for text, data in sorted_results[:top_k]:
+    for _, data in sorted_results[:top_k]:
         result = data["result"]
         results.append(SearchResult(
             text=result.text,

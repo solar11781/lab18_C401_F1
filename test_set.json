@@ -1,3 +1,82 @@
 [
-  {"question": "hihi cả nhà tự tạo testset bằng cơm nhé", "ground_truth": "Không kịp tạo luôn"}
+  {
+    "question": "Tờ khai thuế GTGT trong BCTC.pdf sử dụng mẫu số nào?",
+    "ground_truth": "Mẫu số 01/GTGT."
+  },
+  {
+    "question": "Kỳ tính thuế của tờ khai thuế GTGT là thời gian nào?",
+    "ground_truth": "Quý 4 năm 2024."
+  },
+  {
+    "question": "Tên người nộp thuế trong tờ khai là gì?",
+    "ground_truth": "CÔNG TY CỔ PHẦN DHA SURFACES."
+  },
+  {
+    "question": "Mã số thuế của người nộp thuế trong tờ khai là gì?",
+    "ground_truth": "0106769437."
+  },
+  {
+    "question": "Nghị định 13/2023/NĐ-CP quy định về nội dung gì?",
+    "ground_truth": "Bảo vệ dữ liệu cá nhân."
+  },
+  {
+    "question": "Số thuế GTGT còn được khấu trừ kỳ trước chuyển sang là bao nhiêu?",
+    "ground_truth": "77.377.803 đồng."
+  },
+  {
+    "question": "Giá trị hàng hóa, dịch vụ mua vào trong kỳ và thuế GTGT tương ứng là bao nhiêu?",
+    "ground_truth": "Giá trị hàng hóa, dịch vụ mua vào trong kỳ là 2.405.743.241 đồng; thuế GTGT tương ứng là 215.163.767 đồng."
+  },
+  {
+    "question": "Hàng hóa, dịch vụ bán ra chịu thuế suất 10% có giá trị và thuế GTGT là bao nhiêu?",
+    "ground_truth": "Giá trị là 3.703.685.610 đồng; thuế GTGT là 344.675.400 đồng."
+  },
+  {
+    "question": "Theo Nghị định 13/2023/NĐ-CP, số định danh cá nhân có được xem là dữ liệu cá nhân cơ bản không?",
+    "ground_truth": "Có. Điều 2 liệt kê số định danh cá nhân trong nhóm dữ liệu cá nhân cơ bản."
+  },
+  {
+    "question": "Theo Nghị định 13/2023/NĐ-CP, sự đồng ý của chủ thể dữ liệu chỉ có hiệu lực khi đáp ứng điều kiện gì?",
+    "ground_truth": "Sự đồng ý chỉ có hiệu lực khi chủ thể dữ liệu tự nguyện và biết rõ nội dung đồng ý."
+  },
+  {
+    "question": "Thuế GTGT phát sinh trong kỳ được tính như thế nào và bằng bao nhiêu?",
+    "ground_truth": "Thuế GTGT phát sinh trong kỳ bằng thuế GTGT đầu ra [35] trừ thuế GTGT đầu vào được khấu trừ [25]: 344.675.400 - 215.163.767 = 129.511.633 đồng."
+  },
+  {
+    "question": "Sau khi bù trừ thuế GTGT còn được khấu trừ kỳ trước chuyển sang, số thuế GTGT còn phải nộp trong kỳ là bao nhiêu?",
+    "ground_truth": "52.133.830 đồng, theo chỉ tiêu [40]; số này bằng 129.511.633 - 77.377.803."
+  },
+  {
+    "question": "Tờ khai được lập ngày nào và người ký đại diện là ai?",
+    "ground_truth": "Tờ khai được lập ngày 24 tháng 01 năm 2025; người ký/đại diện là TRỊNH THỊ SANG."
+  },
+  {
+    "question": "Theo Nghị định 13/2023/NĐ-CP, trong bao lâu Bên Kiểm soát dữ liệu cá nhân phải thực hiện yêu cầu cung cấp dữ liệu cá nhân sau khi nhận yêu cầu hợp lệ?",
+    "ground_truth": "Trong 72 giờ sau khi có yêu cầu của chủ thể dữ liệu, trừ trường hợp pháp luật có quy định khác."
+  },
+  {
+    "question": "Khi phát hiện vi phạm quy định bảo vệ dữ liệu cá nhân, thông báo phải gửi cho cơ quan nào và trong thời hạn nào?",
+    "ground_truth": "Phải thông báo cho Bộ Công an, cụ thể là Cục An ninh mạng và phòng, chống tội phạm sử dụng công nghệ cao, chậm nhất 72 giờ sau khi xảy ra hành vi vi phạm."
+  },
+  {
+    "question": "Trong hai tài liệu, có thông tin về tên ngân hàng hoặc số tài khoản nộp thuế của CÔNG TY CỔ PHẦN DHA SURFACES không?",
+    "ground_truth": "Không có thông tin về tên ngân hàng hoặc số tài khoản nộp thuế của CÔNG TY CỔ PHẦN DHA SURFACES trong hai tài liệu được cung cấp."
+  },
+  {
+    "question": "Tờ khai có ghi số chứng chỉ hành nghề của nhân viên đại lý thuế không?",
+    "ground_truth": "Không. Mục 'Chứng chỉ hành nghề số' trong phần Nhân viên đại lý thuế để trống."
+  },
+  {
+    "question": "Nghị định 13/2023/NĐ-CP có quy định một mức phạt tiền cụ thể cho hành vi vi phạm bảo vệ dữ liệu cá nhân không?",
+    "ground_truth": "Không. Tài liệu chỉ nêu rằng tùy mức độ vi phạm mà tổ chức, cá nhân có thể bị xử lý kỷ luật, xử phạt vi phạm hành chính hoặc xử lý hình sự."
+  },
+  {
+    "question": "Có thể xác định từ hai tài liệu rằng CÔNG TY CỔ PHẦN DHA SURFACES đã lập hồ sơ đánh giá tác động xử lý dữ liệu cá nhân theo Điều 24 Nghị định 13/2023/NĐ-CP không?",
+    "ground_truth": "Không thể xác định. Tờ khai thuế không cung cấp thông tin về việc CÔNG TY CỔ PHẦN DHA SURFACES đã lập hồ sơ đánh giá tác động xử lý dữ liệu cá nhân theo Điều 24."
+  },
+  {
+    "question": "Nghị định 13/2023/NĐ-CP có nêu một thời hạn lưu trữ dữ liệu cá nhân cố định bằng số ngày, tháng hoặc năm cho mọi trường hợp không?",
+    "ground_truth": "Không. Nghị định chỉ nêu dữ liệu cá nhân được lưu trữ trong khoảng thời gian phù hợp với mục đích xử lý dữ liệu, trừ trường hợp pháp luật có quy định khác."
+  }
 ]

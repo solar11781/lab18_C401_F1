@@ -1,11 +1,22 @@
 """Module 3: Reranking — Cross-encoder top-20 → top-3 + latency benchmark."""
 
-import os, sys, time, re
+import os
+import re
+import sys
+import time
+import warnings
+import re
 from dataclasses import dataclass
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import RERANK_TOP_K
 
+for pattern in (
+    "builtin type SwigPyPacked has no __module__ attribute",
+    "builtin type SwigPyObject has no __module__ attribute",
+    "builtin type swigvarlink has no __module__ attribute",
+):
+    warnings.filterwarnings("ignore", message=pattern, category=DeprecationWarning)
 
 @dataclass
 class RerankResult:
@@ -23,7 +34,7 @@ class CrossEncoderReranker:
 
     def _load_model(self):
         if self._model is None:
-            # TODO: Load cross-encoder model
+            # Load cross-encoder model
             # Option A: from FlagEmbedding import FlagReranker
             #           self._model = FlagReranker(self.model_name, use_fp16=True)
             # Option B: from sentence_transformers import CrossEncoder
@@ -52,7 +63,7 @@ class CrossEncoderReranker:
         available (both are attempted). If no external model can be loaded
         this function falls back to a lightweight lexical-overlap scorer.
         """
-        # TODO: Implement reranking
+        # Implement reranking
         # 1. model = self._load_model()
         # 2. pairs = [(query, doc["text"]) for doc in documents]
         # 3. scores = model.compute_score(pairs)  # FlagReranker
@@ -133,7 +144,7 @@ class FlashrankReranker:
         self._model = None
 
     def rerank(self, query: str, documents: list[dict], top_k: int = RERANK_TOP_K) -> list[RerankResult]:
-        # TODO (optional): from flashrank import Ranker, RerankRequest
+        # from flashrank import Ranker, RerankRequest
         # model = Ranker(); passages = [{"text": d["text"]} for d in documents]
         # results = model.rerank(RerankRequest(query=query, passages=passages))
         # Provide a simple deterministic lightweight re-ranker using lexical overlap
@@ -166,7 +177,7 @@ class FlashrankReranker:
 
 def benchmark_reranker(reranker, query: str, documents: list[dict], n_runs: int = 5) -> dict:
     """Benchmark latency over n_runs."""
-    # TODO: Implement benchmark
+    # Implement benchmark
     # 1. times = []
     # 2. for _ in range(n_runs):
     #      start = time.perf_counter()
